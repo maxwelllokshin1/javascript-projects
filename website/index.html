@@ -11,7 +11,8 @@
         <nav>
             <ul>
                 <li><a href="#home">HOME</a></li>
-                <li><a href="#snek">SNAKE</a></li>
+                <li><a href="#games">GAMES</a></li>
+                <li><a href="#tracking">TRACKING</a></li>
             </ul>
         </nav>
     </header>
@@ -23,17 +24,51 @@
         </div>
     </section>
 
-    <section id = "snek">
-        <div class = "gameScreen">
-            <h1>SNAKE</h1>
-            <p>snake game here...</p>
 
-            <div id="snakeCanvas">
-                <canvas width="400" height="400" id="game"></canvas>
-                <menu id="startButton">START GAME</menu>
+    <section id="games">
+        <h1 id="allHeaders">GAMES</h1>
+        <section id = "snek">
+            <div class = "gameScreen">
+                <h1>SNAKE:</h1><p>Simple snake game craeted using javascript.</p>
+    
+                <div id="snakeDiv">
+                    <canvas width="400" height="400" id="snakeCanvas"></canvas>
+                    <menu id="snakeStart">[PRESS START]</menu>
+                    <script src="snake.js"></script>
+                </div>
             </div>
-        </div>
+
+            <div class = "gameScreen">
+                <h1>CALCULATOR:</h1><p>A simple calculator</p>
+    
+                <div id="calcDiv">
+                    <canvas width="400" height="400" id="calcCanvas"></canvas>
+                    <menu id="calcStart">[PRESS START]</menu>
+                    <div id="numGrid">
+                        <p id="resultCalc"></p>
+                        <menu class="num" id="num1">1</menu><menu class="num" id="num2">2</menu><menu class="num" id="num3">3</menu><menu class="num" id="plus">+</menu>
+                        <menu class="num"id="num4">4</menu><menu class="num" id="num5">5</menu><menu class="num" id="num6">6</menu><menu class="num" id="minus">-</menu>
+                        <menu class="num"id="num7">7</menu><menu class="num" id="num8">8</menu><menu class="num" id="num9">9</menu><menu class="num" id="multiplication">*</menu>
+                        <menu class="num"id="AC">AC</menu><menu class="num" id="num0">0</menu><menu class="num" id="equal">=</menu><menu class="num" id="divide">/</menu>
+                    </div>
+                    <script src="calc.js"></script>
+                </div>
+            </div>
+        </section>
     </section>
-    <script src="snake.js"></script>
+
+    <section id="tracking">
+        <h1 id="allHeaders">Tracking</h1>
+        <section id = "faceTracking">
+            <div class = "gameScreen">
+                <h1>Face Tracking:</h1><p>Tracks your facial expression</p>
+    
+                <div id="ftDiv">
+                    <canvas width="400" height="400" id="ftCanvas"></canvas>
+                    <menu id="ftStart">[PRESS START]</menu>
+                </div>
+            </div>
+        </section>
+    </section>
 </body>
 </html>
