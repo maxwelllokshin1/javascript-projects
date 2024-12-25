@@ -5,13 +5,10 @@
 }
 
 body {
-    font-family: 'Arial', snas-serif;
+    font-family: 'Arial', sans-serif;
     line-height: 1.6;
     background-color: #d0d0d0;
     color: #333;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
 }
 
 header {
@@ -21,7 +18,11 @@ header {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 20;
+}
+
+p, h1{
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 nav ul{
@@ -47,12 +48,17 @@ nav ul li a:hover {
     color: #006f02;
 }
 
+section {
+    padding: 0px 0px;
+    text-align: center;
+}
+
+
 .hero {
     text-align: center;
-    background-color: #00ad05;  /* Green background */
-    color: white;
+    background-color: #70a972; 
+    color: #b0c3b1;
     padding: 80px 20px;
-    border-radius: 25px;
 }
 
 .hero h1 {
@@ -65,65 +71,227 @@ nav ul li a:hover {
     margin-bottom: 30px;
 }
 
-section {
-    padding: 60px 20px;
-    text-align: center;
+#games{
+    padding: 150px 0px;
 }
 
-section h2 {
+#allHeaders{
     font-size: 2.5em;
-    margin-bottom: 20px;
 }
 
 #snek{
     text-align:left;
 }
 
+#faceTracking{
+    text-align:left;
+}
+
 .gameScreen {
-    background-color: white;
+    background-color: #70a972;
     margin: 20px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: inline-block;
     width: calc(33% - 40px);
     
     text-align:center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-.gameScreen h3 {
-    font-size: 1.8em;
+.gameScreen h1 {
+    font-size: 1.5em;
+    color: #b0c3b1;
+    text-align: left;
+}
+
+.gameScreen p {
+    font-size: 1em;
     margin-bottom: 10px;
+    text-align:right;
+    color: #c1d6c2;
 }
 
 #snakeCanvas {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: calc(100%);
+    height: calc(100%);
     margin: 0 auto;
 }
 
-menu {
+.snakeGame{
+    width: calc(33% - 40px);
+    height: calc(33% - 40px);
+}
+
+#snakeDiv,
+#calcDiv,
+#ftDiv {
+    position: relative;
+    width: 100%; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
+menu{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the button */
-    padding: 12px 30px;
-    background-color: #000;
+    transform: translate(-50%, -50%); 
+    padding: 175px 85px;
     color: white;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    z-index: 10; /* Ensure it's above the canvas */
+    transition: color 0.3s ease;
+    z-index: 10; 
+    font-size: 1.8em; 
+    white-space: nowrap;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    border-color: transparent;
 }
 
 menu:hover {
-    background-color: #006f02;
+    color: #006f02;
 }
 
+#resultCalc{
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    text-align: right;
+    background-color: black;
+    color: white;
+    font-size: 2em;
+    border: none;
+    border-radius: 5px;
+    white-space: nowrap;
+    width: 350px;
+    height: 85px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    padding: 17px 0px;
+
+}
+
+#num1{
+    top: 40%;
+    left: 20%;
+}
+
+#num2{
+    top: 40%;
+    left: 40%;
+}
+
+#num3{
+    top: 40%;
+    left: 60%;
+}
+
+#num4{
+    top: 56%;
+    left: 20%;
+}
+
+#num5{
+    top: 56%;
+    left: 40%;
+}
+
+#num6{
+    top: 56%;
+    left: 60%;
+}
+
+#num7{
+    top: 72%;
+    left: 20%;
+}
+
+#num8{
+    top: 72%;
+    left: 40%;
+}
+
+#num9{
+    top: 72%;
+    left: 60%;
+}
+
+#num0{
+    top: 88%;
+    left: 40%;
+}
+
+
+#plus{
+    top: 40%;
+    left: 80%;
+}
+
+#minus{
+    top: 56%;
+    left: 80%;
+    padding: 5px 34px;
+}
+
+#multiplication{
+    top: 72%;
+    left: 80%;
+    padding: 5px 33px;
+}
+
+#divide{
+    top: 88%;
+    left: 80%;
+    padding: 5px 35px;
+}
+
+#AC{
+    top: 88%;
+    left: 20%;
+    padding: 5px 16px;
+
+}
+
+#equal{
+    top: 88%;
+    left: 60%;
+}
+
+.num{
+    background-color: orange;
+    color: white;
+    font-size: 2em;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.num:hover{
+    background-color: #222;
+    color: white;
+}
+
+
+
 canvas {
-    background-color: #333;
-    border: 1px solid white;
+    background-color: #bbd8bc;
     border-radius: 25px;
-    z-index: 1; /* Canvas is below the button */
+    z-index: 1; 
+}
+
+#snakeCanvas,
+#calcCanvas,
+#ftCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+#tracking{
+    padding: 40px 0px;
 }
