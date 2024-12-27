@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNAKE</title>
+    <title>WEBSITE MAX</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,9 @@
             <ul>
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#games">GAMES</a></li>
+                <li><a href="#ai">AI</a></li>
                 <li><a href="#tracking">TRACKING</a></li>
+
             </ul>
         </nav>
     </header>
@@ -28,17 +30,18 @@
     <section id="games">
         <h1 id="allHeaders">GAMES</h1>
         <section id = "snek">
-            <div class = "gameScreen">
+            <div class = "screen">
                 <h1>SNAKE:</h1><p>Simple snake game craeted using javascript.</p>
     
                 <div id="snakeDiv">
                     <canvas width="400" height="400" id="snakeCanvas"></canvas>
                     <menu id="snakeStart">[PRESS START]</menu>
                     <script src="snake.js"></script>
+                    <script src="snakeGame.js"></script>
                 </div>
             </div>
 
-            <div class = "gameScreen">
+            <div class = "screen">
                 <h1>CALCULATOR:</h1><p>A simple calculator</p>
     
                 <div id="calcDiv">
@@ -57,10 +60,35 @@
         </section>
     </section>
 
+    <section id="ai">
+        <h1 id="allHeaders">AI</h1>
+        <section id = "snakeAI">
+            <div class = "screen">
+                <h1>SNAKE GREEDY AI:</h1><p>Snake game where the snake head only goes for the food without thinking about its next move</p>
+    
+                <div id="snakeGreedyDiv">
+                    <canvas width="400" height="400" id="snakeGreedyCanvas"></canvas>
+                    <menu id="snakeGreedyStart">[PRESS START]</menu>
+                </div>
+                <script src="snakeGreedyApproach.js"></script>
+            </div>
+
+            <div class = "screen">
+                <h1>SNAKE BFS AI:</h1><p>Snake game where the snake thinks about its next move before going for the food</p>
+    
+                <div id="snakeBFSDiv">
+                    <canvas width="400" height="400" id="snakeBFSCanvas"></canvas>
+                    <menu id="snakeBFSStart">[PRESS START]</menu>
+                </div>
+                <script src="snakeBFSApproach.js"></script>
+            </div>
+        </section>
+    </section>
+
     <section id="tracking">
         <h1 id="allHeaders">Tracking</h1>
         <section id = "faceTracking">
-            <div class = "gameScreen">
+            <div class = "screen">
                 <h1>Face Tracking:</h1><p>Tracks your facial expression</p>
     
                 <div id="ftDiv">
