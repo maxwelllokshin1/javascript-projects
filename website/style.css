@@ -71,23 +71,11 @@ section {
     margin-bottom: 30px;
 }
 
-#games{
-    padding: 150px 0px;
-}
-
 #allHeaders{
     font-size: 2.5em;
 }
 
-#snek{
-    text-align:left;
-}
-
-#faceTracking{
-    text-align:left;
-}
-
-.gameScreen {
+.screen {
     background-color: #70a972;
     margin: 20px;
     padding: 20px;
@@ -99,13 +87,13 @@ section {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-.gameScreen h1 {
+.screen h1 {
     font-size: 1.5em;
     color: #b0c3b1;
     text-align: left;
 }
 
-.gameScreen p {
+.screen p {
     font-size: 1em;
     margin-bottom: 10px;
     text-align:right;
@@ -126,7 +114,9 @@ section {
 
 #snakeDiv,
 #calcDiv,
-#ftDiv {
+#ftDiv,
+#snakeGreedyDiv,
+#snakeBFSDiv {
     position: relative;
     width: 100%; 
     height: 400px; 
@@ -287,11 +277,21 @@ canvas {
 
 #snakeCanvas,
 #calcCanvas,
-#ftCanvas {
+#ftCanvas,
+#snakeGreedyCanvas,
+#snakeBFSCanvas {
     width: 100%;
     height: 100%;
 }
 
-#tracking{
-    padding: 40px 0px;
+#games,
+#tracking,
+#ai{
+    padding: 50px 0px;
+}
+
+#snek,
+#faceTracking,
+#snakeAI{
+    text-align:left;
 }
