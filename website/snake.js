@@ -1,10 +1,7 @@
-var canvas = document.getElementById('snakeCanvas');
-var context = canvas.getContext('2d');
+const grid = 16;
+let count = 0;
 
-var grid = 16;
-var count = 0;
-
-var snake = {
+let snake = {
     x: 160,
     y: 160,
 
@@ -15,13 +12,13 @@ var snake = {
 
     maxCells: 4
 };
-var apple = {
+let apple = {
     x: 320,
     y: 320
 };
 
-var snakeDirection;
-var gameLoop;
+let snakeDirection;
+let gameLoop;
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -33,7 +30,6 @@ function moveSnake()
     if (snakeDirection === 'LEFT') { snake.dx = -grid; snake.dy = 0; }
     if (snakeDirection === 'UP') { snake.dx = 0; snake.dy = -grid; }
     if (snakeDirection === 'DOWN') { snake.dx = 0; snake.dy = grid; }
-    if (snakeDirection === 'SPACE') {snake.dx = 0; snake.dy = 0;}
 
     snake.x += snake.dx;
     snake.y += snake.dy;
@@ -45,24 +41,24 @@ function moveSnake()
     }
 }
 
-var change = 0;
+let changeColor = 0;
 
-function draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = 'red';
-    context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+function draw(ctx,canvas, buttonName) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'red';
+    ctx.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
     snake.cells.forEach(function (cell, index) {
 
-        if (change === 0) {
-            context.fillStyle = '#45e34a';
-            change = 1;
-        } else if (change === 1) {
-            context.fillStyle = '#208823';
-            change = 0;
+        if (changeColor === 0) {
+            ctx.fillStyle = '#45e34a';
+            changeColor = 1;
+        } else if (changeColor === 1) {
+            ctx.fillStyle = '#208823';
+            changeColor = 0;
         }
 
-        context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+        ctx.fillRect(cell.x, cell.y, grid - 1, grid - 1);
 
         if (cell.x === apple.x && cell.y === apple.y) {
             snake.maxCells += 3;
@@ -70,31 +66,31 @@ function draw() {
             placeApple();
         }
 
-        gameOverChecker(cell, index);
+        gameOverChecker(cell, index, ctx, canvas, buttonName);
     });
 }
 
-function gameOverChecker(cell, index) {
-    var head = snake.cells[0];
+function gameOverChecker(cell, index, ctx, canvas, buttonName) {
+    let head = snake.cells[0];
     if (head.x < 0 || head.x > canvas.width - grid 
      || head.y < 0 || head.y > canvas.height - grid) {
-            endGame();
+            endGame(ctx, canvas, buttonName);
     }
-    for (var i = index + 1; i < snake.cells.length; i++) {
+    for (let i = index + 1; i < snake.cells.length; i++) {
         if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-            endGame();
+            endGame(ctx, canvas, buttonName);
         }
     }
 }
 
-function endGame()
+function endGame(ctx, canvas, buttonName)
 {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById('snakeStart').style.display = 'block';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById(buttonName).style.display = 'block';
     cancelAnimationFrame(gameLoop);
 }
 
-function resetGame() {
+function resetGame(ctx, canvas, buttonName, choiceAI) {
     snake.x = 160;
     snake.y = 160;
     snake.cells = [];
@@ -102,23 +98,26 @@ function resetGame() {
     snake.dx = 0;
     snake.dy = 0;
     placeApple();
-    document.getElementById('snakeStart').style.display = 'none';
-    startGame();
+    document.getElementById(buttonName).style.display = 'none';
+    startGame(ctx, canvas, buttonName, choiceAI);
 }
 
 function placeApple() {
+
     apple.x = getRandomInt(0, 25) * grid;
     apple.y = getRandomInt(0, 25) * grid;
+
+    snake.cells.forEach(function (index) {
+        for (let i = index; i < snake.cells.length; i++) {
+            if (apple.x === snake.cells[i].x && apple.y === snake.cells[i].y) {
+                apple.x = getRandomInt(0, 25) * grid;
+                apple.y = getRandomInt(0, 25) * grid;
+            }
+        }
+    });
 }
 
-document.getElementById('snakeStart').addEventListener('click', function(){
-    resetGame();
-});
-
-function startGame()
-{
-    snakeDirection = 'RIGHT';
-    document.getElementById('snakeStart').style.display = 'none';
+function playerMoves(){
     document.addEventListener('keydown', (event) => {
         if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key))
         {
@@ -130,6 +129,12 @@ function startGame()
         if (event.key === 'ArrowLeft' && snakeDirection !== 'RIGHT') snakeDirection = 'LEFT';
         if (event.key === 'ArrowRight' && snakeDirection !== 'LEFT') snakeDirection = 'RIGHT';
     });
+}
+
+function startGame(ctx, canvas, buttonName, choiceAI)
+{
+    snakeDirection = 'RIGHT';
+    document.getElementById(buttonName).style.display = 'none';
 
     function loop() {
         gameLoop = requestAnimationFrame(loop);
@@ -140,8 +145,20 @@ function startGame()
     
         count = 0;
     
+
+        switch(choiceAI){
+            case "GREEDY":
+                moveGreedySnake();
+                break;
+            case "BFS":
+                moveBFSSnake();
+                break;
+            default:
+                playerMoves();
+                break;
+        }
         moveSnake();
-        draw();
+        draw(ctx, canvas, buttonName);
     }
     
     gameLoop = requestAnimationFrame(loop);
