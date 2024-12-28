@@ -112,17 +112,6 @@ section {
     height: calc(33% - 40px);
 }
 
-#snakeDiv,
-#calcDiv,
-#ftDiv,
-#snakeGreedyDiv,
-#snakeBFSDiv {
-    position: relative;
-    width: 100%; 
-    height: 400px; 
-    margin: 0 auto;
-}
-
 menu{
     position: absolute;
     top: 50%;
@@ -275,11 +264,24 @@ canvas {
     z-index: 1; 
 }
 
+#snakeDiv,
+#calcDiv,
+#ftDiv,
+#snakeGreedyDiv,
+#snakeBFSDiv,
+#fbDiv {
+    position: relative;
+    width: 100%; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
 #snakeCanvas,
 #calcCanvas,
 #ftCanvas,
 #snakeGreedyCanvas,
-#snakeBFSCanvas {
+#snakeBFSCanvas,
+#fbCanvas {
     width: 100%;
     height: 100%;
 }
@@ -290,7 +292,7 @@ canvas {
     padding: 50px 0px;
 }
 
-#snek,
+#gaming,
 #faceTracking,
 #snakeAI{
     text-align:left;
