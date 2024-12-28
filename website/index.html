@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEBSITE MAX</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -19,8 +21,8 @@
         </nav>
     </header>
 
-    <section id = "home">
-        <div class = "hero">
+    <section id="home">
+        <div class="hero">
             <h1>WEBSITE MAX</h1>
             <p>games and stuff...</p>
         </div>
@@ -29,32 +31,53 @@
 
     <section id="games">
         <h1 id="allHeaders">GAMES</h1>
-        <section id = "snek">
-            <div class = "screen">
-                <h1>SNAKE:</h1><p>Simple snake game craeted using javascript.</p>
-    
+        <section id="gaming">
+            <div class="screen">
+                <h1>SNAKE:</h1>
+                <p>Simple snake game craeted using javascript.</p>
+
                 <div id="snakeDiv">
                     <canvas width="400" height="400" id="snakeCanvas"></canvas>
                     <menu id="snakeStart">[PRESS START]</menu>
-                    <script src="snake.js"></script>
-                    <script src="snakeGame.js"></script>
                 </div>
             </div>
 
-            <div class = "screen">
-                <h1>CALCULATOR:</h1><p>A simple calculator</p>
-    
+            <div class="screen">
+                <h1>CALCULATOR:</h1>
+                <p>A simple calculator</p>
+
                 <div id="calcDiv">
                     <canvas width="400" height="400" id="calcCanvas"></canvas>
                     <menu id="calcStart">[PRESS START]</menu>
                     <div id="numGrid">
                         <p id="resultCalc"></p>
-                        <menu class="num" id="num1">1</menu><menu class="num" id="num2">2</menu><menu class="num" id="num3">3</menu><menu class="num" id="plus">+</menu>
-                        <menu class="num"id="num4">4</menu><menu class="num" id="num5">5</menu><menu class="num" id="num6">6</menu><menu class="num" id="minus">-</menu>
-                        <menu class="num"id="num7">7</menu><menu class="num" id="num8">8</menu><menu class="num" id="num9">9</menu><menu class="num" id="multiplication">*</menu>
-                        <menu class="num"id="AC">AC</menu><menu class="num" id="num0">0</menu><menu class="num" id="equal">=</menu><menu class="num" id="divide">/</menu>
+                        <menu class="num" id="num1">1</menu>
+                        <menu class="num" id="num2">2</menu>
+                        <menu class="num" id="num3">3</menu>
+                        <menu class="num" id="plus">+</menu>
+                        <menu class="num" id="num4">4</menu>
+                        <menu class="num" id="num5">5</menu>
+                        <menu class="num" id="num6">6</menu>
+                        <menu class="num" id="minus">-</menu>
+                        <menu class="num" id="num7">7</menu>
+                        <menu class="num" id="num8">8</menu>
+                        <menu class="num" id="num9">9</menu>
+                        <menu class="num" id="multiplication">*</menu>
+                        <menu class="num" id="AC">AC</menu>
+                        <menu class="num" id="num0">0</menu>
+                        <menu class="num" id="equal">=</menu>
+                        <menu class="num" id="divide">/</menu>
                     </div>
-                    <script src="calc.js"></script>
+                </div>
+            </div>
+
+            <div class="screen">
+                <h1>FLAPPY BIRD:</h1>
+                <p>Just flappy bird that simple</p>
+
+                <div id="fbDiv">
+                    <canvas width="400" height="400" id="fbCanvas"></canvas>
+                    <menu id="fbStart">[PRESS START]</menu>
                 </div>
             </div>
         </section>
@@ -62,35 +85,36 @@
 
     <section id="ai">
         <h1 id="allHeaders">AI</h1>
-        <section id = "snakeAI">
-            <div class = "screen">
-                <h1>SNAKE GREEDY AI:</h1><p>Snake game where the snake head only goes for the food without thinking about its next move</p>
-    
+        <section id="snakeAI">
+            <div class="screen">
+                <h1>SNAKE GREEDY AI:</h1>
+                <p>Snake game where the snake head only goes for the food without thinking about its next move</p>
+
                 <div id="snakeGreedyDiv">
                     <canvas width="400" height="400" id="snakeGreedyCanvas"></canvas>
                     <menu id="snakeGreedyStart">[PRESS START]</menu>
                 </div>
-                <script src="snakeGreedyApproach.js"></script>
             </div>
 
-            <div class = "screen">
-                <h1>SNAKE BFS AI:</h1><p>Snake game where the snake thinks about its next move before going for the food</p>
-    
+            <div class="screen">
+                <h1>SNAKE BFS AI:</h1>
+                <p>Snake game where the snake thinks about its next move before going for the food</p>
+
                 <div id="snakeBFSDiv">
                     <canvas width="400" height="400" id="snakeBFSCanvas"></canvas>
                     <menu id="snakeBFSStart">[PRESS START]</menu>
                 </div>
-                <script src="snakeBFSApproach.js"></script>
             </div>
         </section>
     </section>
 
     <section id="tracking">
         <h1 id="allHeaders">Tracking</h1>
-        <section id = "faceTracking">
-            <div class = "screen">
-                <h1>Face Tracking:</h1><p>Tracks your facial expression</p>
-    
+        <section id="faceTracking">
+            <div class="screen">
+                <h1>Face Tracking:</h1>
+                <p>Tracks your facial expression</p>
+
                 <div id="ftDiv">
                     <canvas width="400" height="400" id="ftCanvas"></canvas>
                     <menu id="ftStart">[PRESS START]</menu>
@@ -98,5 +122,15 @@
             </div>
         </section>
     </section>
+
+    <script src="allGames.js"></script>
+    <script src="snakeBFSApproach.js"></script>
+    <script src="fbScript.js"></script>
+    <script src="fbGame.js"></script>
+    <script src="calc.js"></script>
+    <script src="snake.js"></script>
+    <script src="snakeGame.js"></script>
+    <script src="snakeGreedyApproach.js"></script>
 </body>
+
 </html>
