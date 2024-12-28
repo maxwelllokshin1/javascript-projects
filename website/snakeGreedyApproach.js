@@ -4,7 +4,7 @@ const snakeGreedyContext = snakeGreedyCanvas.getContext('2d');
 var snakeGreedyPressStart = 'snakeGreedyStart';
 
 document.getElementById(snakeGreedyPressStart).addEventListener('click', function(){
-    resetGame(snakeGreedyContext, snakeGreedyCanvas, snakeGreedyPressStart, 'GREEDY');
+    resetSnake(snakeGreedyContext, snakeGreedyCanvas, snakeGreedyPressStart, 'GREEDY');
 });
 
 function moveGreedySnake(){

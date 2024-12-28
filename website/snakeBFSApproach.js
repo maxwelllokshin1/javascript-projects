@@ -4,7 +4,7 @@ const snakeBFSContext = snakeBFSCanvas.getContext('2d');
 var snakeBFSPressStart = 'snakeBFSStart';
 
 document.getElementById(snakeBFSPressStart).addEventListener('click', function(){
-    resetGame(snakeBFSContext, snakeBFSCanvas, snakeBFSPressStart, 'BFS');
+    resetSnake(snakeBFSContext, snakeBFSCanvas, snakeBFSPressStart, 'BFS');
 });
 
 function bfsPathFinding(){

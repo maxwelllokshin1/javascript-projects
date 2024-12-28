@@ -58,7 +58,7 @@ function draw(ctx,canvas, buttonName) {
             changeColor = 0;
         }
 
-        ctx.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+        ctx.fillRect(cell.x, cell.y, grid, grid);
 
         if (cell.x === apple.x && cell.y === apple.y) {
             snake.maxCells += 3;
@@ -72,25 +72,18 @@ function draw(ctx,canvas, buttonName) {
 
 function gameOverChecker(cell, index, ctx, canvas, buttonName) {
     let head = snake.cells[0];
-    if (head.x < 0 || head.x > canvas.width - grid 
-     || head.y < 0 || head.y > canvas.height - grid) {
-            endGame(ctx, canvas, buttonName);
+    if (head.x < 0 || head.x > canvas.width - grid ||
+        head.y < 0 || head.y > canvas.height - grid) {
+            endGame(canvas, ctx, buttonName, gameLoop);
     }
     for (let i = index + 1; i < snake.cells.length; i++) {
         if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-            endGame(ctx, canvas, buttonName);
+            endGame(canvas, ctx, buttonName, gameLoop);
         }
     }
 }
 
-function endGame(ctx, canvas, buttonName)
-{
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById(buttonName).style.display = 'block';
-    cancelAnimationFrame(gameLoop);
-}
-
-function resetGame(ctx, canvas, buttonName, choiceAI) {
+function resetSnake(ctx, canvas, buttonName, choiceAI) {
     snake.x = 160;
     snake.y = 160;
     snake.cells = [];
@@ -99,22 +92,23 @@ function resetGame(ctx, canvas, buttonName, choiceAI) {
     snake.dy = 0;
     placeApple();
     document.getElementById(buttonName).style.display = 'none';
-    startGame(ctx, canvas, buttonName, choiceAI);
+    startSnake(ctx, canvas, buttonName, choiceAI);
 }
 
 function placeApple() {
 
     apple.x = getRandomInt(0, 25) * grid;
     apple.y = getRandomInt(0, 25) * grid;
+}
 
-    snake.cells.forEach(function (index) {
-        for (let i = index; i < snake.cells.length; i++) {
-            if (apple.x === snake.cells[i].x && apple.y === snake.cells[i].y) {
-                apple.x = getRandomInt(0, 25) * grid;
-                apple.y = getRandomInt(0, 25) * grid;
-            }
+function appleOnSnake()
+{
+    for (let i = 0; i < snake.cells.length; i++) {
+        if (apple.x === snake.cells[i].x && apple.y === snake.cells[i].y) {
+            return true;
         }
-    });
+    }
+    return false;
 }
 
 function playerMoves(){
@@ -131,7 +125,7 @@ function playerMoves(){
     });
 }
 
-function startGame(ctx, canvas, buttonName, choiceAI)
+function startSnake(ctx, canvas, buttonName, choiceAI)
 {
     snakeDirection = 'RIGHT';
     document.getElementById(buttonName).style.display = 'none';
@@ -139,24 +133,24 @@ function startGame(ctx, canvas, buttonName, choiceAI)
     function loop() {
         gameLoop = requestAnimationFrame(loop);
     
-        if (++count < 4) {
-            return;
-        }
-    
-        count = 0;
-    
-
         switch(choiceAI){
             case "GREEDY":
+                console.log("GREEDY");
                 moveGreedySnake();
                 break;
             case "BFS":
+                console.log("BFS");
                 moveBFSSnake();
                 break;
             default:
                 playerMoves();
                 break;
         }
+        if (++count < 4) {
+            return;
+        }
+    
+        count = 0;
         moveSnake();
         draw(ctx, canvas, buttonName);
     }
