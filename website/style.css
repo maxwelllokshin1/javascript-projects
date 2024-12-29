@@ -154,6 +154,23 @@ menu:hover {
 
 }
 
+#fbScore,
+#fbGreedyAIScore{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    /* transform: translate(-50%, -10%); */
+    text-align: left;
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 5px;
+    width: 350px;
+    height: 85px;
+    overflow: hidden;
+
+}
+
 #num1{
     top: 40%;
     left: 20%;
@@ -269,7 +286,9 @@ canvas {
 #ftDiv,
 #snakeGreedyDiv,
 #snakeBFSDiv,
-#fbDiv {
+#fbDiv,
+#fbGreedyDiv,
+#tttDiv {
     position: relative;
     width: 100%; 
     height: 400px; 
@@ -281,7 +300,9 @@ canvas {
 #ftCanvas,
 #snakeGreedyCanvas,
 #snakeBFSCanvas,
-#fbCanvas {
+#fbCanvas,
+#fbGreedyCanvas,
+#tttCanvas {
     width: 100%;
     height: 100%;
 }
@@ -294,6 +315,6 @@ canvas {
 
 #gaming,
 #faceTracking,
-#snakeAI{
+#allAI{
     text-align:left;
 }

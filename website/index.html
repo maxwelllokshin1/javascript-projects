@@ -78,6 +78,18 @@
                 <div id="fbDiv">
                     <canvas width="400" height="400" id="fbCanvas"></canvas>
                     <menu id="fbStart">[PRESS START]</menu>
+                    <p id="fbScore"></p>
+                </div>
+            </div>
+
+
+            <div class="screen">
+                <h1>Tic Tac Toe:</h1>
+                <p>Play tic tac toe against an ai</p>
+
+                <div id="tttDiv">
+                    <canvas width="400" height="400" id="tttCanvas"></canvas>
+                    <menu id="tttStart">[PRESS START]</menu>
                 </div>
             </div>
         </section>
@@ -85,7 +97,7 @@
 
     <section id="ai">
         <h1 id="allHeaders">AI</h1>
-        <section id="snakeAI">
+        <section id="allAI">
             <div class="screen">
                 <h1>SNAKE GREEDY AI:</h1>
                 <p>Snake game where the snake head only goes for the food without thinking about its next move</p>
@@ -103,6 +115,17 @@
                 <div id="snakeBFSDiv">
                     <canvas width="400" height="400" id="snakeBFSCanvas"></canvas>
                     <menu id="snakeBFSStart">[PRESS START]</menu>
+                </div>
+            </div>
+
+            <div class="screen">
+                <h1>FLAPPY BIRD GREEDY AI:</h1>
+                <p>Assisted flappy bird AI. Only goes for middle of pipes</p>
+
+                <div id="fbGreedyDiv">
+                    <canvas width="400" height="400" id="fbGreedyCanvas"></canvas>
+                    <menu id="fbGreedyStart">[PRESS START]</menu>
+                    <p id="fbGreedyAIScore"></p>
                 </div>
             </div>
         </section>
@@ -123,14 +146,20 @@
         </section>
     </section>
 
-    <script src="allGames.js"></script>
-    <script src="snakeBFSApproach.js"></script>
-    <script src="fbScript.js"></script>
-    <script src="fbGame.js"></script>
-    <script src="calc.js"></script>
-    <script src="snake.js"></script>
-    <script src="snakeGame.js"></script>
-    <script src="snakeGreedyApproach.js"></script>
+    <script src="javascriptCode/games/allGames.js"></script>
+
+    <script src="javascriptCode/games/calc/calc.js"></script>
+
+    <script src="javascriptCode/games/snake/snake.js"></script>
+    <script src="javascriptCode/games/snake/snakeGame.js"></script>
+    <script src="javascriptCode/games/snake/ai/snakeBFSApproach.js"></script>
+    <script src="javascriptCode/games/snake/ai/snakeGreedyApproach.js"></script>
+
+    <script src="javascriptCode/games/flappyBird/fbScript.js"></script>
+    <script src="javascriptCode/games/flappyBird/fbGame.js"></script>
+    <script src="javascriptCode/games/flappyBird/ai/fbGreedyApproach.js"></script>
+
+    <script src="javascriptCode/games/tictactoe/tttScript.js"></script>
 </body>
 
 </html>
