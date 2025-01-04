@@ -92,6 +92,17 @@
                     <menu id="tttStart">[PRESS START]</menu>
                 </div>
             </div>
+
+            <div class="screen">
+                <h1>Pong:</h1>
+                <p>Play pong against an ai</p>
+
+                <div id="pongGameDiv">
+                    <canvas width="400" height="400" id="pongGameCanvas"></canvas>
+                    <menu id="pongGameStart">[PRESS START]</menu>
+                </div>
+            </div>
+
         </section>
     </section>
 
@@ -128,6 +139,17 @@
                     <p id="fbGreedyAIScore"></p>
                 </div>
             </div>
+
+            <div class="screen">
+                <h1>Pong AI Battle:</h1>
+                <p>ai VS ai</p>
+
+                <div id="pongAIGameDiv">
+                    <canvas width="400" height="400" id="pongAIGameCanvas"></canvas>
+                    <menu id="pongAIGameStart">[PRESS START]</menu>
+                </div>
+            </div>
+
         </section>
     </section>
 
@@ -160,6 +182,10 @@
     <script src="javascriptCode/games/flappyBird/ai/fbGreedyApproach.js"></script>
 
     <script src="javascriptCode/games/tictactoe/tttScript.js"></script>
+
+    <script src="javascriptCode/games/pong/pong.js"></script>
+    <script src="javascriptCode/games/pong/pongScript.js"></script>
+    <script src="javascriptCode/games/pong/ai/pongAI.js"></script>
 </body>
 
 </html>
