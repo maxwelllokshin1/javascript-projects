@@ -55,21 +55,25 @@ function drawPongGame(canvas, ctx) {
 function moveBall(canvas, ctx, button, choiceAI) {
     pongBall.x += pongBall.dx;
     pongBall.y += pongBall.dy;
-    if(collidingBallAndPaddle(playerOne, canvas)) resetPongGame(canvas,ctx,button,choiceAI);
-    if(collidingBallAndPaddle(playerTwo, canvas)) resetPongGame(canvas,ctx,button,choiceAI);
+    if(collidingBallAndPaddle(playerOne, canvas) || collidingBallAndPaddle(playerTwo, canvas)) resetPongGame(canvas,ctx,button,choiceAI);
 }
 
 
 function collidingBallAndPaddle(paddle, canvas) {
-    if (pongBall.y <= paddle.y + pongPlayersHeight && pongBall.y + grid >= paddle.y &&
-        pongBall.x <= paddle.x + pongPlayersWidth && pongBall.x + grid >= paddle.x) {
-            pongBall.dx = -(pongBall.dx);
+    const ballHitsPaddle = pongBall.y <= paddle.y + pongPlayersHeight && pongBall.y + grid >= paddle.y &&
+    pongBall.x <= paddle.x + pongPlayersWidth && pongBall.x + grid >= paddle.x;
+    if (ballHitsPaddle) {
+            pongBall.dx = -pongBall.dx;
+            if (pongBall.y + grid <= paddle.y + pongPlayersHeight / 3) {
+                pongBall.dy = -Math.abs(pongBall.dy); // Top of the paddle
+                pongBall.dx = -pongBall.dx;
+            } else if (pongBall.y >= paddle.y + pongPlayersHeight * 2 / 3) {
+                pongBall.dy = Math.abs(pongBall.dy); // Bottom of the paddle
+                pongBall.dx = -pongBall.dx;
+            }
     }
-    if (pongBall.y <= 0 /*|| (pongBall.y <= paddle.y + pongPlayersHeight && pongBall.x <= paddle.x + pongPlayersWidth && pongBall.x + grid >= paddle.x)*/) {
-        pongBall.dy = grid / 4;
-    } else if (pongBall.y + grid >= canvas.height /*|| (pongBall.y + grid >= paddle.y && pongBall.x <= paddle.x + pongPlayersWidth && pongBall.x + grid >= paddle.x)*/) {
-        pongBall.dy = -grid / 4;
-    }
+    if (pongBall.y <= 0 ) pongBall.dy = grid / 4;
+    if (pongBall.y + grid >= canvas.height ) pongBall.dy = -grid / 4;
 
     if (pongBall.x <= 0) {
         playerTwo.score += 1;
@@ -81,120 +85,115 @@ function collidingBallAndPaddle(paddle, canvas) {
     return false;
 }
 
-function pongPlayerOne(canvas, choiceAI) {
+function pongPlayerMovement(player, canvas, choiceAI){
     if(choiceAI === 'none'){
         document.addEventListener('mousemove', function (event) {
             const rect = canvas.getBoundingClientRect();
-            const mouseY = event.clientY - rect.top;
-
-            playerOne.y = mouseY;
-            // playerOne.y = Math.max(0, playerOne.y);
-            // playerOne.y = Math.min(playerOne.y, canvas.height - pongPlayersHeight);
+            player.y = event.clientY - rect.top;
         });
-    }else if(choiceAI === 'AI'){
-        playerOne.y += playerOne.dy;
-    }
-    playerOne.y = Math.max(0, playerOne.y)
-    playerOne.y = Math.min(playerOne.y, canvas.height - pongPlayersHeight);
+    }else if (choiceAI === 'AI'){ player.y += player.dy; }
+    player.y = Math.max(0, Math.min(player.y, canvas.height - pongPlayersHeight));
 }
 
-function pongPlayerTwo(canvas) {
-
-    playerTwo.y += playerTwo.dy;
-    playerTwo.y = Math.max(0, playerTwo.y)
-    playerTwo.y = Math.min(playerTwo.y, canvas.height - pongPlayersHeight);
-}
 
 function resetPongGame(canvas, ctx, button, choiceAI) {
     cancelAnimationFrame(pongGameLoop);
-    let randX = Math.floor(Math.random() * 2);
-    let randY = Math.floor(Math.random() * 2);
-    if (randX === 0) { pongBall.dx = -grid / 4; }
-    else { pongBall.dx = grid / 4; }
-    if (randY === 0) { pongBall.dy = -grid / 4; }
-    else { pongBall.dy = grid / 4; }
 
-    pongBall.x = 400 / 2;
-    pongBall.y = 400 / 2;
-
-    // playerOne.y = 400 / 2;
-    // playerTwo.y = 400 / 2;
-
-    playerOne.dy = 0;
-    playerTwo.dy = 0;
+    playerOne = {
+        x: grid,
+        y: playerOne.y,
+        dy: 0,
+        score: playerOne.score
+    };
+    playerTwo = {
+        x: canvas.width - grid * 2 - pongPlayersWidth,
+        y: canvas.height / 2 - pongPlayersHeight / 2,
+        dy: 0,
+        score: playerTwo.score
+    };
+    pongBall = {
+        x: canvas.width / 2 - grid / 2,
+        y: canvas.height / 2 - grid / 2,
+        dx: Math.random() > 0.5 ? grid / 4 : -grid / 4,
+        dy: Math.random() > 0.5 ? grid / 4 : -grid / 4
+    };
 
     startPongGame(canvas, ctx, button, choiceAI);
 }
 
 function startPongGame(canvas, ctx, button, choiceAI) {
     let randMove = 0;
-    // setInterval(() => {
-        // playerTwo.dy = 0;
-        // randMove = Math.floor(Math.random()*2);
-        // if (randMove === 0) {
-        //     playerTwo.dy = -grid;
-        // } else {
-        //     playerTwo.dy = grid;
-        // }
-
-    //     if(pongBall.y < playerTwo.y + pongPlayersHeight/2)
-    //         {
-    //             playerTwo.dy = -grid;
-    //         }else if(pongBall.y > playerTwo.y + pongPlayersHeight/2){
-    //             playerTwo.dy = grid;
-    //         }
-
-    // }, 500);
     setInterval(()=>{
 
         if(choiceAI === 'AI')
         {
             if(pongBall.x <= canvas.width/2){
-                if (pongBall.y > playerOne.y + pongPlayersHeight || pongBall.y + grid < playerOne.y) {
-                    if(pongBall.y < playerOne.y + pongPlayersHeight){
-                        playerOne.dy = -grid;
-                    }else if (pongBall.y + grid > playerOne.y) {
-                        playerOne.dy = grid;
-                    }
-                }else{
-                    playerOne.dy = 0;
+                // if (pongBall.y > playerOne.y + pongPlayersHeight || pongBall.y + grid < playerOne.y) {
+                //     playerOne.dy = pongBall.y < playerOne.y + pongPlayersHeight ? -grid : grid;
+                // } else {
+                //     playerOne.dy = 0;
+                // }
+                let projectedBallX = pongBall.x;
+                let projectedBallY = pongBall.y;
+                while(projectedBallX > grid && projectedBallX < canvas.width - grid*2)
+                {
+                    projectedBallX += pongBall.dx;
+                    projectedBallY += pongBall.dy;
                 }
+
+                // console.log('projectedBallX: ' + projectedBallX + ' projectedBallY:' + projectedBallY);
+
+                // move to projected spot
+
+                if(playerOne.y <= projectedBallY && playerOne.y + pongPlayersHeight >= projectedBallY) playerOne.dy = 0;
+                else if(playerOne.y  < projectedBallY) playerOne.dy = grid;
+                else if(playerOne.y + pongPlayersHeight/2 > projectedBallY) playerOne.dy = -grid;
             }else{
-                // playerOne.dy = 0;
                 randMove = Math.floor(Math.random()*4);
-                if (randMove === 0) {
-                    playerOne.dy = -grid;
-                } else if(randMove === 1){
-                    playerOne.dy = grid;
-                }else if(randMove === 2 || randMove === 3){
-                    playerOne.dy = 0;
-                }
+                if (randMove === 0)playerOne.dy = -grid;
+                else if(randMove === 1)playerOne.dy = grid;
+                else playerOne.dy = 0;
             }
         }
 
+        if (pongBall.x >= canvas.width / 2) {
+            // if (pongBall.y > playerTwo.y + pongPlayersHeight || pongBall.y + grid < playerTwo.y) {
+            //     if(pongBall.y -grid <= playerTwo.y + pongPlayersHeight/2){
+            //         console.log('less');
+            //         playerTwo.dy = -grid;
+            //     }else if(pongBall.y >= playerTwo.y){
+            //         console.log('greater');
+            //         playerTwo.dy = grid;
+            //     }
+            // } else {
+            //     playerTwo.dy = 0;
+            // }
 
-        if(pongBall.x >= canvas.width/2){
-            if (pongBall.y > playerTwo.y + pongPlayersHeight || pongBall.y + grid < playerTwo.y) {
-                if(pongBall.y < playerTwo.y + pongPlayersHeight){
-                    playerTwo.dy = -grid;
-                }else if (pongBall.y + grid > playerTwo.y) {
-                    playerTwo.dy = grid;
-                }
-            }else{
-                playerTwo.dy = 0;
+            // create projected path
+            let projectedBallX = pongBall.x;
+            let projectedBallY = pongBall.y;
+            while(projectedBallX > grid && projectedBallX < canvas.width - grid*2)
+            {
+                projectedBallX += pongBall.dx;
+                projectedBallY += pongBall.dy;
             }
-        }else{
-            // playerTwo.dy = 0;
-            randMove = Math.floor(Math.random()*4);
-            if (randMove === 0) {
-                playerTwo.dy = -grid;
-            } else if(randMove === 1){
-                playerTwo.dy = grid;
-            }else if(randMove === 2 || randMove === 3){
-                playerTwo.dy = 0;
-            }
+
+            // console.log('projectedBallX: ' + projectedBallX + ' projectedBallY:' + projectedBallY);
+
+            // move to projected spot
+
+            if(playerTwo.y <= projectedBallY && playerTwo.y + pongPlayersHeight >= projectedBallY) playerTwo.dy = 0;
+            else if(playerTwo.y  < projectedBallY) playerTwo.dy = grid;
+            else if(playerTwo.y + pongPlayersHeight/2 > projectedBallY) playerTwo.dy = -grid;
+
+
+        } else {
+            randMove = Math.floor(Math.random() * 4);
+            if (randMove === 0) playerTwo.dy = -grid;
+            else if (randMove === 1) playerTwo.dy = grid;
+            else playerTwo.dy = 0;
         }
-    }, 250);
+    }, 1);
 
     function pongLoop() {
         pongGameLoop = requestAnimationFrame(pongLoop);
@@ -204,9 +203,9 @@ function startPongGame(canvas, ctx, button, choiceAI) {
         // }
         // pongCounter = 0;
 
-        pongPlayerOne(canvas, choiceAI);
+        pongPlayerMovement(playerOne, canvas, choiceAI);
 
-        pongPlayerTwo(canvas);
+        pongPlayerMovement(playerTwo, canvas, 'AI');
 
         moveBall(canvas, ctx, button, choiceAI);
         drawPongGame(canvas, ctx);
